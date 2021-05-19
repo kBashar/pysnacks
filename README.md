@@ -23,5 +23,17 @@ ToDos
 
 20 x 20 400 cell 
 400 x 400 
+array = [5][6]
+array[3][2] = 1
+array[3][3] = 1
+
+0 0 0 0 0
+0 0 1 0 0
+0 1 1 0 0
+0 0 0 0 0
+0 0 2 0 0
+0 0 0 0 0
 
 
+refs:
+https://realpython.com/python-scope-legb-rule/
