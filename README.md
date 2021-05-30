@@ -12,8 +12,7 @@ Problem statement
 5. If the snake hits an edge, Game Over!
 
 ToDos
-1.a. Make a grid in the screen and store the grid cell values in a
-    2D array.
+1.a. Make a grid in the screen.
 1. Create an object that moves in three directions. 
 2. Make the apple object appear randomly on screen.
 3. On eating(colliding with) the object the sanke object grows in length.

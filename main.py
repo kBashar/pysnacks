@@ -57,6 +57,4 @@ def main():
                     X_Cell -= 1
                     if not draw_sanke():
                         X_Cell += 1
-                
-                print()
 main()
