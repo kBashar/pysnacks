@@ -16,6 +16,10 @@ ToDos
 >> 1.b. Create an object that moves in three directions.
 >> 1.c. snake object moves automatically 
 2. Make the frog object appear randomly on screen.
+    >> cell conversion math
+    make a random integer to select cell
+    check for the presence of the snake
+
 3. On eating(colliding with) the object the sanke object grows in length.
 4. Follow the snake path
 5. A new Oject pop up excluding the sanke body.
