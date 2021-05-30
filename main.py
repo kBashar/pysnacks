@@ -1,4 +1,5 @@
 import sys, pygame
+import time
 from pygame.locals import*
 
 width=400
@@ -6,11 +7,16 @@ height=400
 Color_screen= "#06273a"
 Color_line= "#797e66"
 Color_snake = "#461815"
+Color_frog = "#4f772d"
 Cell_size = 20
 X_Cell = 10
 Y_Cell = 10
 X_Tail_Cell = -1
 Y_Tail_Cell = -1
+
+GAME_ON = True
+SNAKE_FACE_DIRECTION = None
+GAME_BOARD = [0]*400
 
 screen=pygame.display.set_mode((width,height))
 
@@ -26,8 +32,27 @@ def draw_sanke():
     pygame.display.flip()
     return True
 
+def snake_speed(direction):
+    global X_Cell, Y_Cell
+    if direction == "down":
+        Y_Cell += 1
+        if not draw_sanke():
+            Y_Cell -= 1
+    elif direction == "up":
+        Y_Cell -= 1
+        if not draw_sanke():
+            Y_Cell += 1
+    elif direction == "right":
+        X_Cell += 1
+        if not draw_sanke():
+            X_Cell -= 1
+    elif direction == "left":
+        X_Cell -= 1
+        if not draw_sanke():
+            X_Cell += 1
+
 def main():
-    global Y_Cell, X_Cell
+    global Y_Cell, X_Cell, SNAKE_FACE_DIRECTION
     screen.fill(Color_screen)
     for times in range(1, 20):
         changer = Cell_size * times
@@ -42,21 +67,13 @@ def main():
             elif event.type == KEYDOWN:
                 key_pressed = pygame.key.name(event.key)
                 if key_pressed == "down":
-                    Y_Cell += 1
-                    if not draw_sanke():
-                        Y_Cell -= 1
+                    SNAKE_FACE_DIRECTION = "down"
                 elif key_pressed == "up":
-                    Y_Cell -= 1
-                    if not draw_sanke():
-                        Y_Cell += 1
+                    SNAKE_FACE_DIRECTION = "up"
                 elif key_pressed == "right":
-                    X_Cell += 1
-                    if not draw_sanke():
-                        X_Cell -= 1
+                    SNAKE_FACE_DIRECTION = "right"
                 elif key_pressed == "left":
-                    X_Cell -= 1
-                    if not draw_sanke():
-                        X_Cell += 1
-                
-                print()
+                    SNAKE_FACE_DIRECTION = "left"
+        snake_speed(SNAKE_FACE_DIRECTION)
+        time.sleep(0.40)
 main()
