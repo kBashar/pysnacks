@@ -46,39 +46,45 @@ def draw_frog(index):
 def draw_sanke():
     global X_Tail_Cell, Y_Tail_Cell, snake_pos_list
     if X_Cell>19 or X_Cell<0 or Y_Cell>19 or Y_Cell<0:
-        return False
-    if len(snake_pos_list)>0:
-        snake_pos_list.pop()
-    pygame.draw.rect(screen, Color_snake, pygame.Rect((Cell_size*X_Cell)+1, (Cell_size*Y_Cell)+1, Cell_size-1, Cell_size-1))
+        return False 
+    for pos in snake_pos_list:
+        x, y = get_cell_pos(pos)
+        pygame.draw.rect(screen, Color_snake, pygame.Rect((Cell_size*x)+1, (Cell_size*y)+1, Cell_size-1, Cell_size-1))
     if X_Tail_Cell != -1:
         pygame.draw.rect(screen, Color_screen, pygame.Rect((Cell_size*X_Tail_Cell)+1, (Cell_size*Y_Tail_Cell)+1, Cell_size-1, Cell_size-1))
-    X_Tail_Cell = X_Cell
-    Y_Tail_Cell = Y_Cell
-    snake_pos_list.append(get_index_from_xy(X_Cell, Y_Cell))
     pygame.display.flip()
     return True
 
 def snake_speed(direction):
-    global X_Cell, Y_Cell
+    global X_Cell, Y_Cell, X_Tail_Cell, Y_Tail_Cell
+    if len(snake_pos_list)>0:
+        X_Tail_Cell, Y_Tail_Cell = get_cell_pos(snake_pos_list.pop(0))
     if direction == "down":
         Y_Cell += 1
+        snake_pos_list.append(get_index_from_xy(X_Cell, Y_Cell))
         if not draw_sanke():
             Y_Cell -= 1
     elif direction == "up":
         Y_Cell -= 1
+        snake_pos_list.append(get_index_from_xy(X_Cell, Y_Cell))
         if not draw_sanke():
             Y_Cell += 1
     elif direction == "right":
         X_Cell += 1
+        snake_pos_list.append(get_index_from_xy(X_Cell, Y_Cell))
         if not draw_sanke():
             X_Cell -= 1
     elif direction == "left":
         X_Cell -= 1
+        snake_pos_list.append(get_index_from_xy(X_Cell, Y_Cell))
         if not draw_sanke():
             X_Cell += 1
     snake_face = get_index_from_xy(X_Cell, Y_Cell)
     if snake_face == FROG_POS:
         draw_frog(generate_frog_pos())
+        snake_pos_list.append(get_index_from_xy(X_Tail_Cell, Y_Tail_Cell))
+        draw_sanke()
+
 
 def main():
     global Y_Cell, X_Cell, SNAKE_FACE_DIRECTION
