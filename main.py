@@ -18,7 +18,7 @@ Y_Tail_Cell = -1
 GAME_ON = True
 SNAKE_FACE_DIRECTION = None
 GAME_BOARD = [0]*400
-FROG_POS = -1;
+FROG_POS = -1
 snake_pos_list = []
 
 screen=pygame.display.set_mode((width,height))

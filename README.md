@@ -42,3 +42,12 @@ array[3][3] = 1
 
 refs:
 https://realpython.com/python-scope-legb-rule/
+
+How to make the Snake grow:
+1. first make a  function grow_snake to take a paramiter Index and drawes the snake at an index.
+2. it will take in the index position of x_tail_cell, and y_tail_cell and draw a snake block.
+3. it will also clear it's tail position and keeps on drawing a block as it will continue to take index param.
+4. this function will be called everytime snake collides with frog.
+5. it will only inherit positon of its previous cell/block meaning 2nd time it is called it will take param from it's previous call.
+6. This will keep going on.
+7. I am running out of ideas.  
