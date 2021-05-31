@@ -82,7 +82,7 @@ def snake_speed(direction):
     snake_face = get_index_from_xy(X_Cell, Y_Cell)
     if snake_face == FROG_POS:
         draw_frog(generate_frog_pos())
-        snake_pos_list.append(get_index_from_xy(X_Tail_Cell, Y_Tail_Cell))
+        snake_pos_list.insert(0 ,get_index_from_xy(X_Tail_Cell, Y_Tail_Cell))
         draw_sanke()
 
 
