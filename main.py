@@ -20,6 +20,12 @@ SNAKE_FACE_DIRECTION = None
 GAME_BOARD = [0]*400
 FROG_POS = -1
 snake_pos_list = []
+op_directions ={
+    'left': 'right',
+    "right": "left",
+    'down': 'up',
+    'up': 'down',
+}
 
 screen=pygame.display.set_mode((width,height))
 
@@ -87,7 +93,7 @@ def snake_speed(direction):
 
 
 def main():
-    global Y_Cell, X_Cell, SNAKE_FACE_DIRECTION
+    global Y_Cell, X_Cell, SNAKE_FACE_DIRECTION, op_directions
     screen.fill(Color_screen)
     for times in range(1, 20):
         changer = Cell_size * times
@@ -95,7 +101,7 @@ def main():
         pygame.draw.line(screen, Color_line, (0,changer), (400, changer))
     draw_sanke()
     draw_frog(generate_frog_pos())
-
+    prev_direction = None
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -110,6 +116,12 @@ def main():
                     SNAKE_FACE_DIRECTION = "right"
                 elif key_pressed == "left":
                     SNAKE_FACE_DIRECTION = "left"
+        if prev_direction==None:
+            prev_direction=SNAKE_FACE_DIRECTION
+        elif op_directions[prev_direction] != SNAKE_FACE_DIRECTION:
+            prev_direction= SNAKE_FACE_DIRECTION
+        else:
+            SNAKE_FACE_DIRECTION= prev_direction
         snake_speed(SNAKE_FACE_DIRECTION)
         print(snake_pos_list)
         time.sleep(0.40)
