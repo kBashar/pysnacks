@@ -114,27 +114,28 @@ def main():
     draw_frog(generate_frog_pos())
     prev_direction = None
     while True:
-        if GAME_ON :
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    sys.exit(0)
-                elif event.type == KEYDOWN:
-                    key_pressed = pygame.key.name(event.key)
-                    if key_pressed == "down":
-                        SNAKE_FACE_DIRECTION = "down"
-                    elif key_pressed == "up":
-                        SNAKE_FACE_DIRECTION = "up"
-                    elif key_pressed == "right":
-                        SNAKE_FACE_DIRECTION = "right"
-                    elif key_pressed == "left":
-                        SNAKE_FACE_DIRECTION = "left"
-            if prev_direction==None:
-                prev_direction=SNAKE_FACE_DIRECTION
-            elif op_directions[prev_direction] != SNAKE_FACE_DIRECTION:
-                prev_direction= SNAKE_FACE_DIRECTION
-            else:
-                SNAKE_FACE_DIRECTION= prev_direction
-            snake_speed(SNAKE_FACE_DIRECTION)
-            print(snake_pos_list)
-            time.sleep(0.40)      
+        if not GAME_ON :
+            break
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                sys.exit(0)
+            elif event.type == KEYDOWN:
+                key_pressed = pygame.key.name(event.key)
+                if key_pressed == "down":
+                    SNAKE_FACE_DIRECTION = "down"
+                elif key_pressed == "up":
+                    SNAKE_FACE_DIRECTION = "up"
+                elif key_pressed == "right":
+                    SNAKE_FACE_DIRECTION = "right"
+                elif key_pressed == "left":
+                    SNAKE_FACE_DIRECTION = "left"
+        if prev_direction==None:
+            prev_direction=SNAKE_FACE_DIRECTION
+        elif op_directions[prev_direction] != SNAKE_FACE_DIRECTION:
+            prev_direction= SNAKE_FACE_DIRECTION
+        else:
+            SNAKE_FACE_DIRECTION= prev_direction
+        snake_speed(SNAKE_FACE_DIRECTION)
+        print(snake_pos_list)
+        time.sleep(0.40)      
 main()
